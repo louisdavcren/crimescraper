@@ -2,14 +2,14 @@ from bs4 import BeautifulSoup as bs # BeautifulSoup for scraping HTML
 import mechanize          # Mechanize for filling forms
 import requests                     
 
-# Mech setup
+# Mechanize setup - fetches from the police uk website
 
 br = mechanize.Browser()
 br.set_handle_robots(False)
 br.open("https://data.police.uk/data/")
 response = br.response()
 
-# Selecting form
+# Selecting form - selects the form and inputs the related
 def select_form(form):
     return form.attrs.get('action', None) == '.'
 
@@ -17,6 +17,7 @@ br.select_form(predicate=select_form)
 
 print(response.geturl())
 
+# Hardcoding the values for testing
 most_recent = '2019-12'
 least_recent = '2019-10'
 selected_force = 'south-wales'
